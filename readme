@@ -1,0 +1,25 @@
+# Web Automation Testing with Python
+
+This repository contains Python code for automating web testing using the Selenium library. Selenium is a powerful tool for automating web browsers and is widely used for web application testing.
+
+## Prerequisites
+
+- Python 3.x installed on your system
+- Selenium library installed (`pip install selenium`)
+- Chrome WebDriver installed and accessible in your PATH (for Chrome browser automation)
+
+## Installation
+
+1. Clone this repository to your local machine:
+
+```bash
+git clone https://github.com/your-username/web-automation-testing.git
+
+Navigate to the project directory:
+bash
+Copy code
+cd web-automation-testing
+Install the required dependencies:
+bash
+Copy code
+pip install -r requirements.tx
