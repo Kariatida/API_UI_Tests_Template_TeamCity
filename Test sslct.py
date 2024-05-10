@@ -110,6 +110,15 @@ browser.quit()
 # Find an element by its CSS selector and interact with it
 element = browser.find_element_by_css_selector("input[type='password']")
 element.send_keys("password")
+# Find an element by its ID and interact with it
+element = browser.find_element_by_id("some_id")
+element.click()  # Click on the element
+element.send_keys("Some text to input")  # Input text into the element
+
+# Find an element by its class name and interact with it
+element = browser.find_element_by_class_name("some_class")
+element.click()
+
 
 # Wait for an element to be clickable
 try:
