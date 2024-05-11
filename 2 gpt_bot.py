@@ -39,7 +39,22 @@ llm_chain = LLMChain(
     memory=memory,
     verbose=True,
 )
+bot = telebot.TeleBot(tg_token)
 
+template = """I want you to act as a mental health counselor. 
+I need your guidance and advice on managing emotions, stress, anxiety and 
+other mental health issues. You should use your knowledge of cognitive 
+behavioral therapy, meditation techniques, mindfulness practices, 
+and other therapeutic modalities to create strategies that a person 
+can implement to improve their overall well-being.
+First, try applying your knowledge of Stoicism.
+Maximum response length 5 sentences
+If possible, try to answer in 2-3 sentences.
+You need to involve the user in a dialogue
+Each sentence must be moved to a new line
+Answer in Russian
+
+{chat_history}
 print('start1')
 def send_to_gtp(message_text):
     answer = llm_chain.predict(human_input=message_text)
