@@ -211,7 +211,41 @@ Answer in Russian
 {chat_history}
 Human: {human_input}
 Chatbot:"""
+Answer in Russian
 
+{chat_history}
+print('start1')
+def send_to_gtp(message_text):
+    answer = llm_chain.predict(human_input=message_text)
+    return answer
+
+@bot.message_handler(commands=['start'])
+def send_welcome(message):
+    bot.reply_to(message, "Привет! Я бот на базе gpt")
+
+@bot.message_handler(func=lambda message: True)
+def echo_all(message):
+    response = send_to_gtp(message.text)
+    bot.reply_to(message, response)
+print('start2')
+# Поллинг обновлений с использованием getUpdatesAnswer in Russian
+
+{chat_history}
+print('start1')
+def send_to_gtp(message_text):
+    answer = llm_chain.predict(human_input=message_text)
+    return answer
+
+@bot.message_handler(commands=['start'])
+def send_welcome(message):
+    bot.reply_to(message, "Привет! Я бот на базе gpt")
+
+@bot.message_handler(func=lambda message: True)
+def echo_all(message):
+    response = send_to_gtp(message.text)
+    bot.reply_to(message, response)
+print('start2')
+# Поллинг обновлений с использованием getUpdates
 prompt = PromptTemplate(
     input_variables=["chat_history", "human_input"], template=template
 )
