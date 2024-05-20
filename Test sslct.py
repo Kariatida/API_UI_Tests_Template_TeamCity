@@ -88,7 +88,23 @@ except:
 
 # Close the browser
 browser.quit()
+   )
+    element.click()
+except:
+    print("Element not found or clickable within 10 seconds")
 
+# Close the browser
+browser.quit()
+
+# Find an element by its CSS selector and interact with it
+element = browser.find_element_by_css_selector("input[type='password']")
+element.send_keys("password")
+
+# Wait for an element to be clickable
+try:
+    element = WebDriverWait(browser, 10).until(
+        EC.element_to_be_clickable((By.ID, "some_id"))
+    )
 
 # Find an element by its CSS selector and interact with it
 element = browser.find_element_by_css_selector("input[type='password']")
