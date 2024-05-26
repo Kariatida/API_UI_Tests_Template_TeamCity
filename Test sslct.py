@@ -20,7 +20,21 @@ browser = webdriver.Chrome()  # You need to have Chrome webdriver installed and 
 
 # Open a website
 browser.get("https://example.com")
+# Initialize the browser
+browser = webdriver.Chrome()  # You need to have Chrome webdriver installed and accessible in PATH
 
+# Open a website
+browser.get("https://example.com")
+from selenium import webdriver
+from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+
+# Initialize the browser
+browser = webdriver.Chrome()  # You need to have Chrome webdriver installed and accessible in PATH
+
+# Open a website
 # Find an element by its ID and interact with it
 element = browser.find_element_by_id("some_id")
 element.click()  # Click on the element
