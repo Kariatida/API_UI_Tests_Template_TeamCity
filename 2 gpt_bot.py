@@ -89,7 +89,20 @@ You need to involve the user in a dialogue
 Each sentence must be moved to a new line
 Answer in Russian
 
-{chat_history}
+{chat_history}import os
+
+from langchain.memory import ConversationBufferMemory
+from langchain.schema import messages_from_dict, messages_to_dict
+from langchain import OpenAI, LLMChain, PromptTemplate
+from langchain.chat_models import ChatOpenAI
+
+os.environ["OPENAI_API_KEY"] = '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'
+tg_token = '6411150650:AAGp1_P9-alRuqh-U-V2neJ0h10SQXJ8eEscan implement to improve their overall well-being.
+First, try applying your knowledge of Stoicism.
+Maximum response length 5 sentences
+If possible, try to answer in 2-3 sentences.
+You need to involve the user in a dialogue
+Each sentence must be moved to a new line
 print('start1')
 def send_to_gtp(message_text):
     answer = llm_chain.predict(human_input=message_text)
