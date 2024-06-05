@@ -28,6 +28,27 @@ Answer in Russian
 Human: {human_input}
 Chatbot:"""
 
+os.environ["OPENAI_API_KEY"] = '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'
+tg_token = '6411150650:AAGp1_P9-alRuqh-U-V2neJ0h10SQXJ8eEs'
+
+bot = telebot.TeleBot(tg_token)
+
+template = """I want you to act as a mental health counselor. 
+I need your guidance and advice on managing emotions, stress, anxiety and 
+other mental health issues. You should use your knowledge of cognitive 
+behavioral therapy, meditation techniques, mindfulness practices, 
+and other therapeutic modalities to create strategies that a person 
+can implement to improve their overall well-being.
+First, try applying your knowledge of Stoicism.
+Maximum response length 5 sentences
+If possible, try to answer in 2-3 sentences.
+You need to involve the user in a dialogue
+Each sentence must be moved to a new line
+Answer in Russian
+
+{chat_history}
+
+
 prompt = PromptTemplate(
     input_variables=["chat_history", "human_input"], template=template
 )
