@@ -7,6 +7,9 @@ from selenium.webdriver.support import expected_conditions as EC
 # Initialize the browser
 browser = webdriver.Chrome()  # You need to have Chrome webdriver installed and accessible in PATH
 
+# Initialize the browser
+browser = webdriver.Chrome()  # You need to have Chrome webdriver installed and accessible in PATH
+
 # Open a website
 browser.get("https://example.com")
 from selenium import webdriver
