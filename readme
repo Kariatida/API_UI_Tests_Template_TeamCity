@@ -10,6 +10,11 @@ This repository contains Python code for automating web testing using the Seleni
 
 - Python 3.x installed on your system
 - Selenium library installed (`pip install seleniu
+]
+## Prerequisites
+
+- Python 3.x installed on your system
+- Selenium library installed (`pip install seleniu
 
 ## Prerequisites
 
