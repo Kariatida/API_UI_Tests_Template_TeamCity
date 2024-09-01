@@ -80,6 +80,16 @@ This repository contains Python code for automating web testing using the Seleni
 - Chrome WebDriver installed and accessible in your PATH (for Chrome browser automation)
 
 
+## Prerequisites
+
+- Python 3.x installed on your system
+- Selenium library installed (`pip install seleniu
+
+- Python 3.x installed on your system
+- Selenium library installed (`pip install selenium`)
+- Chrome WebDriver installed and accessible in your PATH (for Chrome browser automation)
+
+
 1. Clone this repository to your local machine:
 
 
