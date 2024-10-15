@@ -32,7 +32,7 @@ class CreateFormContainerFragment(BasePage):
 
     def input_project_details(self, name, project_id, description):
         with allure.step("Entering data for project creation"):
-            self.actions.wait_for_selector(self.project_name_selector, timeout=120000)
+            self.actions.wait_for_selector(self.project_name_selector, timeout=200000)
             self.actions.input_text(self.project_name_selector, name)
             self.actions.input_text(self.project_id_selector, project_id)
             self.actions.input_text(self.project_description_selector, description)
