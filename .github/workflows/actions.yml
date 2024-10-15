@@ -1,0 +1,92 @@
+name: Run System Tests
+##
+on:
+  push:
+    branches: [ "main", "final-version", "Configure-CI" ]
+  pull_request:
+    branches: [ "main", "final-version", "Configure-CI" ]
+  workflow_dispatch:
+
+jobs:
+  run-tests:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up Docker
+        uses: docker/setup-buildx-action@v1
+
+      - name: Prepare Logs Directory
+        run: |
+          mkdir -p ./logs
+          sudo chown -R 1000:1000 ./logs
+
+      - name: Run TeamCity Server Container
+        run: |
+          docker run -d --name teamcity-server-instance -v ${{ github.workspace }}/logs:/opt/teamcity/logs -p 8111:8111 jetbrains/teamcity-server
+          echo "Waiting for TeamCity server to start..."
+          for i in {1..30}; do
+            if docker logs teamcity-server-instance 2>&1 | grep -q 'TeamCity process PID is'; 
+            then
+              echo "TeamCity server started successfully."
+              break
+            fi
+            echo "Waiting..."
+            sleep 5
+          done
+          echo "Docker Status:"
+          docker ps -a
+          echo "TeamCity Server Logs:"
+          docker logs teamcity-server-instance
+
+      - name: Check Port Availability
+        run: |
+          echo "Checking if port 8111 is open..."
+          if nc -z localhost 8111; then
+            echo "Port 8111 is open."
+          else
+            echo "Port 8111 is not open."
+          fi
+
+      - name: Run TeamCity Agent Container
+        run: |
+          docker run -d --name teamcity-agent-instance -e SERVER_URL="<http://localhost:8111>" jetbrains/teamcity-agent
+
+      - name: Install Python Dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y python3.10 python3-pip
+          pip install -r requirements.txt
+
+      - name: Run Set Up Test
+        run: |
+          playwright install
+          pytest -v tests/frontend/test_set_up.py
+
+      - name: Retrieve Super User Token
+        run: |
+          timeout=180 
+          while [ $timeout -gt 0 ]; do
+            if docker logs teamcity-server-instance 2>&1 | grep -q 'Super user authentication token'; then
+              echo "Token found in logs, extracting..."
+              token=$(docker logs teamcity-server-instance 2>&1 | grep -oP 'Super user authentication token: \K[0-9]+')
+              echo "Super user token: $token"
+              echo "SUPER_USER_TOKEN=$token" >> $GITHUB_ENV
+              break
+            else
+              echo "Token not found, waiting..."
+              sleep 10 # Check interval every 10 seconds
+              timeout=$((timeout-10))
+            fi
+          done
+          if [ $timeout -le 0 ]; then
+            echo "Failed to retrieve super user token within the timeout period."
+          fi
+        shell: /usr/bin/bash -e {0}
+
+      - name: Run Tests
+        run: |
+          pytest -v --alluredir=results --ignore=tests/frontend/test_set_up.py
+
