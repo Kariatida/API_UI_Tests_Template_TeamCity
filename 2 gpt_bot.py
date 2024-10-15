@@ -14,6 +14,10 @@ from langchain.schema import messages_from_dict, messages_to_dict
 from langchain import OpenAI, LLMChain, PromptTemplate
 from langchain.chat_models import ChatOpenAI
 
+from langchain.memory import ConversationBufferMemory
+from langchain.schema import messages_from_dict, messages_to_dict
+from langchain import OpenAI, LLMChain, PromptTemplate
+from langchain.chat_models import ChatOpenAI
 os.environ["OPENAI_API_KEY"] = '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'
 tg_token = '6411150650:AAGp1_P9-alRuqh-U-V2neJ0h10SQXJ8eEs'
 
