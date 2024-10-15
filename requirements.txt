@@ -1,0 +1,10 @@
+pydantic~=2.9.2
+requests~=2.32.3
+pytest~=8.3.3
+Faker~=28.4.1
+python-dotenv~=1.0.1
+playwright~=1.47.0
+async-timeout~=4.0.3
+allure-pytest
+pytest-assume
+allure-python-commons~=2.13.5

@@ -1,0 +1,1 @@
+BROWSERS = ['chromium']
